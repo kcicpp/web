@@ -34,7 +34,6 @@
             </nav>
         </div>
     </header>
-
     <!-- Banner Slider -->
     <section class="banner-slider">
         <div class="slider">
@@ -167,6 +166,30 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    
+
+    <!-- Cart Popup -->
+<div class="cart-popup" id="cartPopup">
+    <div class="cart-popup-content">
+        <div class="cart-popup-header">
+            <h3>Giỏ hàng của bạn</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-popup-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-popup-summary">
+            <div class="summary-row">
+                <span>Tổng cộng</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <p class="tax-note">Thuế và phí vận chuyển tính khi thanh toán</p>
+            <button class="btn checkout-btn">Thanh toán</button>
+            <button class="btn view-cart-btn">Xem giỏ hàng</button>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+
 </body>
 </html>

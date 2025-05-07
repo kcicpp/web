@@ -153,3 +153,133 @@ notificationStyle.textContent = `
     }
 `;
 document.head.appendChild(notificationStyle);
+
+
+// gio hang
+// Cart functionality
+let cart = [
+    {
+        id: 1,
+        name: 'Love Boat Pin',
+        price: 29.00,
+        quantity: 1,
+        image: 'images/product1.jpg'
+    },
+    {
+        id: 2,
+        name: 'Al Love Sky Purse',
+        price: 35.00,
+        quantity: 1,
+        image: 'images/product2.jpg'
+    },
+    {
+        id: 3,
+        name: 'Sky x AURORA Doll Plush Set',
+        price: 95.00,
+        quantity: 1,
+        image: 'images/product3.jpg'
+    }
+];
+
+// DOM Elements
+const cartIcon = document.querySelector('.cart-icon');
+const cartPopup = document.getElementById('cartPopup');
+const cartOverlay = document.createElement('div');
+cartOverlay.className = 'cart-overlay';
+document.body.appendChild(cartOverlay);
+const closeCartBtn = document.querySelector('.close-cart');
+const cartItemsContainer = document.getElementById('cartItems');
+const cartTotalElement = document.getElementById('cartTotal');
+const cartCountElement = document.querySelector('.cart-count');
+
+// Toggle cart popup
+function toggleCart() {
+    cartPopup.classList.toggle('open');
+    cartOverlay.classList.toggle('active');
+    renderCartItems();
+    updateCartTotal();
+}
+
+// Render cart items
+function renderCartItems() {
+    cartItemsContainer.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p>Giỏ hàng trống</p>';
+        return;
+    }
+    
+    cart.forEach(item => {
+        const cartItemElement = document.createElement('div');
+        cartItemElement.className = 'cart-popup-item';
+        
+        cartItemElement.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-popup-item-img">
+            <div class="cart-popup-item-details">
+                <h4 class="cart-popup-item-name">${item.name}</h4>
+                <p class="cart-popup-item-price">$${item.price.toFixed(2)}</p>
+                <div class="cart-popup-item-quantity">
+                    <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                    <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${item.id}">
+                    <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                </div>
+            </div>
+        `;
+        
+        cartItemsContainer.appendChild(cartItemElement);
+    });
+    
+    // Add event listeners to quantity buttons
+    document.querySelectorAll('.quantity-btn').forEach(btn => {
+        btn.addEventListener('click', handleQuantityChange);
+    });
+    
+    document.querySelectorAll('.quantity-input').forEach(input => {
+        input.addEventListener('change', handleQuantityInputChange);
+    });
+}
+
+// Update cart total
+function updateCartTotal() {
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    cartTotalElement.textContent = `$${total.toFixed(2)}`;
+    cartCountElement.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+}
+
+// Handle quantity change
+function handleQuantityChange(e) {
+    const id = parseInt(this.dataset.id);
+    const item = cart.find(item => item.id === id);
+    const isMinus = this.classList.contains('minus');
+    
+    if (item) {
+        if (isMinus && item.quantity > 1) {
+            item.quantity--;
+        } else if (!isMinus) {
+            item.quantity++;
+        }
+        
+        renderCartItems();
+        updateCartTotal();
+    }
+}
+
+// Handle quantity input change
+function handleQuantityInputChange(e) {
+    const id = parseInt(this.dataset.id);
+    const item = cart.find(item => item.id === id);
+    const newQuantity = parseInt(this.value) || 1;
+    
+    if (item) {
+        item.quantity = newQuantity;
+        updateCartTotal();
+    }
+}
+
+// Event listeners
+cartIcon.addEventListener('click', toggleCart);
+closeCartBtn.addEventListener('click', toggleCart);
+cartOverlay.addEventListener('click', toggleCart);
+
+// Initialize cart
+updateCartTotal();

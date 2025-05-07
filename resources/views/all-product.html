@@ -59,10 +59,10 @@
                         <h3>Danh mục</h3>
                         <ul>
                             <li><a href="#" class="active">Tất cả</a></li>
-                            <li><a href="#">Áo thun</a></li>
-                            <li><a href="#">Áo sơ mi</a></li>
-                            <li><a href="#">Quần jeans</a></li>
-                            <li><a href="#">Phụ kiện</a></li>
+                            <li><a href="#">Vietnamese</a></li>
+                            <li><a href="#">Chinese</a></li>
+                            <li><a href="#">Japanese</a></li>
+                            <li><a href="#">Other</a></li>
                         </ul>
                     </div>
 
@@ -80,24 +80,16 @@
                         </div>
 
                         <div class="filter-options">
-                            <h4>Kích cỡ</h4>
+                            <h4>Transcriber</h4>
                             <div class="size-options">
-                                <label><input type="checkbox" name="size" value="S"> S</label>
+                                <label><input type="checkbox" name="size" value="KChip"> S</label>
                                 <label><input type="checkbox" name="size" value="M"> M</label>
                                 <label><input type="checkbox" name="size" value="L"> L</label>
                                 <label><input type="checkbox" name="size" value="XL"> XL</label>
                             </div>
                         </div>
 
-                        <div class="filter-options">
-                            <h4>Màu sắc</h4>
-                            <div class="color-options">
-                                <span class="color-box black" data-color="black"></span>
-                                <span class="color-box white" data-color="white"></span>
-                                <span class="color-box red" data-color="red"></span>
-                                <span class="color-box blue" data-color="blue"></span>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <button class="btn apply-filters">Áp dụng bộ lọc</button>
@@ -181,7 +173,28 @@
             </div>
         </div>
     </footer>
-
-    <script src="products.js"></script>
+    <!-- Cart Popup -->
+<div class="cart-popup" id="cartPopup">
+    <div class="cart-popup-content">
+        <div class="cart-popup-header">
+            <h3>Giỏ hàng của bạn</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-popup-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-popup-summary">
+            <div class="summary-row">
+                <span>Tổng cộng</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <p class="tax-note">Thuế và phí vận chuyển tính khi thanh toán</p>
+            <button class="btn checkout-btn">Thanh toán</button>
+            <button class="btn view-cart-btn">Xem giỏ hàng</button>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+<script src="products.js"></script>
 </body>
 </html>
